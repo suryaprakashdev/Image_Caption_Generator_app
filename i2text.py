@@ -79,7 +79,7 @@ def process_multiple_images(uploaded_files: List, model, feature_extractor, toke
 
 def main():
     # Title and description
-    st.title("🖼️ AI Image Caption Generator")
+    st.title(" AI Image Caption Generator")
     st.markdown("""
     Generate descriptive captions for your images using a pre-trained Vision Transformer (ViT) + GPT-2 model.
     Upload single or multiple images to get AI-generated captions.
@@ -94,10 +94,10 @@ def main():
         return
     
     # Model info
-    st.success(f"✅ Model loaded successfully! Running on: {device}")
+    st.success(f" Model loaded successfully! Running on: {device}")
     
     # Sidebar configuration
-    st.sidebar.header("⚙️ Configuration")
+    st.sidebar.header(" Configuration")
     
     # Caption length slider
     st.sidebar.markdown("### Caption Length")
@@ -131,7 +131,7 @@ def main():
     
     if input_method == "Single Image Upload":
         with col1:
-            st.subheader("📤 Upload Image")
+            st.subheader(" Upload Image")
             uploaded_file = st.file_uploader(
                 "Choose an image file",
                 type=['png', 'jpg', 'jpeg', 'bmp', 'gif'],
@@ -144,12 +144,12 @@ def main():
                 st.image(image, caption=f"Uploaded: {uploaded_file.name}", use_column_width=True)
                 
                 # Generate caption button
-                if st.button("🔮 Generate Caption", type="primary"):
+                if st.button(" Generate Caption", type="primary"):
                     with st.spinner("Generating caption..."):
                         caption = generate_caption(image, model, feature_extractor, tokenizer, device, max_length)
                     
                     with col2:
-                        st.subheader("📝 Generated Caption")
+                        st.subheader(" Generated Caption")
                         st.success(caption)
                         
                         # Download option
@@ -157,7 +157,7 @@ def main():
                                                   columns=["Image", "Caption"])
                         csv_data = caption_data.to_csv(index=False)
                         st.download_button(
-                            "💾 Download as CSV",
+                            " Download as CSV",
                             csv_data,
                             file_name="image_caption.csv",
                             mime="text/csv"
@@ -165,7 +165,7 @@ def main():
     
     elif input_method == "Multiple Images Upload":
         with col1:
-            st.subheader("📤 Upload Multiple Images")
+            st.subheader("Upload Multiple Images")
             uploaded_files = st.file_uploader(
                 "Choose image files",
                 type=['png', 'jpg', 'jpeg', 'bmp', 'gif'],
@@ -174,10 +174,10 @@ def main():
             )
             
             if uploaded_files:
-                st.write(f"📊 **{len(uploaded_files)} images uploaded**")
+                st.write(f"**{len(uploaded_files)} images uploaded**")
                 
                 # Show thumbnails
-                if st.checkbox("🖼️ Show image previews"):
+                if st.checkbox(" Show image previews"):
                     cols = st.columns(3)
                     for i, uploaded_file in enumerate(uploaded_files[:9]):  # Show max 9 previews
                         with cols[i % 3]:
@@ -188,13 +188,13 @@ def main():
                         st.info(f"Showing first 9 images. Total: {len(uploaded_files)} images")
                 
                 # Process all images button
-                if st.button("🔮 Generate All Captions", type="primary"):
+                if st.button(" Generate All Captions", type="primary"):
                     with st.spinner("Processing all images..."):
                         results = process_multiple_images(uploaded_files, model, feature_extractor, 
                                                         tokenizer, device, max_length)
                     
                     with col2:
-                        st.subheader("📝 Generated Captions")
+                        st.subheader(" Generated Captions")
                         
                         # Display results
                         df = pd.DataFrame(results, columns=["Image", "Caption"])
@@ -203,18 +203,18 @@ def main():
                         # Download options
                         csv_data = df.to_csv(index=False)
                         st.download_button(
-                            "💾 Download as CSV",
+                            " Download as CSV",
                             csv_data,
                             file_name="batch_image_captions.csv",
                             mime="text/csv"
                         )
                         
                         # Success message
-                        st.success(f"✅ Successfully generated captions for {len(results)} images!")
+                        st.success(f"Successfully generated captions for {len(results)} images!")
     
     elif input_method == "Camera Capture":
         with col1:
-            st.subheader("📷 Camera Capture")
+            st.subheader(" Camera Capture")
             camera_image = st.camera_input("Take a picture")
             
             if camera_image is not None:
@@ -223,12 +223,12 @@ def main():
                 st.image(image, caption="Captured Image", use_column_width=True)
                 
                 # Generate caption button
-                if st.button("🔮 Generate Caption", type="primary"):
+                if st.button(" Generate Caption", type="primary"):
                     with st.spinner("Generating caption..."):
                         caption = generate_caption(image, model, feature_extractor, tokenizer, device, max_length)
                     
                     with col2:
-                        st.subheader("📝 Generated Caption")
+                        st.subheader(" Generated Caption")
                         st.success(caption)
                         
                         # Download option
@@ -236,7 +236,7 @@ def main():
                                                   columns=["Image", "Caption"])
                         csv_data = caption_data.to_csv(index=False)
                         st.download_button(
-                            "💾 Download as CSV",
+                            " Download as CSV",
                             csv_data,
                             file_name="camera_caption.csv",
                             mime="text/csv"
@@ -244,7 +244,7 @@ def main():
     
     # Footer with additional information
     st.markdown("---")
-    with st.expander("ℹ️ About this Application"):
+    with st.expander(" About this Application"):
         st.markdown("""
         ### Model Information
         - **Model:** nlpconnect/vit-gpt2-image-captioning
@@ -265,4 +265,5 @@ def main():
         """)
 
 if __name__ == "__main__":
+
     main()
