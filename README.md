@@ -1,18 +1,18 @@
-# 🖼️ AI Image Caption Generator
+# AI Image Caption Generator
 
 A simple web app that generates captions for images using the **ViT (Vision Transformer)** model.  
 The app is deployed on **Streamlit** for easy use.
 
 ---
 
-## 🚀 Features
+## Features
 - Upload an image and get an AI-generated caption.
 - Powered by **ViT Vision Transformer**.
 - Deployed with **Streamlit** for seamless interaction.
 
 ---
 
-## 👨‍💻 How to Use
+## How to Use
 1. Click the link below to open the app.  
 2. Upload an image for which you want to generate a caption.  
 3. Click on **"Generate Caption"**.  
